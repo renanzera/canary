@@ -1,12 +1,11 @@
 local config = {
 	items = {
-		{ id = 35284, charges = 64400 },
-		{ id = 35279, charges = 64400 },
-		{ id = 35281, charges = 64400 },
-		{ id = 35283, charges = 64400 },
-		{ id = 35282, charges = 64400 },
-		{ id = 35280, charges = 64400 },
-		{ id = 44066, charges = 64400 },
+		{ id = 35284, charges = 10000 },
+		{ id = 35279, charges = 10000 },
+		{ id = 35281, charges = 10000 },
+		{ id = 35283, charges = 10000 },
+		{ id = 35282, charges = 10000 },
+		{ id = 35280, charges = 10000 },
 	},
 	storage = tonumber(Storage.PlayerWeaponReward), -- storage key, player can only win once
 }
@@ -32,11 +31,18 @@ local function sendExerciseRewardModal(player)
 						item:setActionId(IMMOVABLE_ACTION_ID)
 						item:setAttribute(ITEM_ATTRIBUTE_STORE, systemTime())
 						item:setAttribute(ITEM_ATTRIBUTE_DESCRIPTION, string.format("You won this exercise weapon as a reward to be a %s player. Use it in a dummy!\nHave a nice game..", configManager.getString(configKeys.SERVER_NAME)))
+						
+						local shield = inbox:addItem(44066, 10000)
+						if shield then
+							shield:setActionId(IMMOVABLE_ACTION_ID)
+							shield:setAttribute(ITEM_ATTRIBUTE_STORE, systemTime())
+							shield:setAttribute(ITEM_ATTRIBUTE_DESCRIPTION, string.format("You won this exercise shield as a reward to be a %s player. Use it in a dummy!\nHave a nice game..", configManager.getString(configKeys.SERVER_NAME)))
+						end
 					else
 						player:sendTextMessage(MESSAGE_LOOK, "You need to have capacity and empty slots to receive.")
 						return
 					end
-					player:sendTextMessage(MESSAGE_LOOK, string.format("Congratulations, you received a %s with %i charges in your store inbox.", iType:getName(), it.charges))
+					player:sendTextMessage(MESSAGE_LOOK, string.format("Congratulations, you received a %s and durable exercise shield with %i charges in your store inbox.", iType:getName(), it.charges))
 					player:setStorageValue(config.storage, 1)
 				else
 					player:sendTextMessage(MESSAGE_LOOK, "You need to have capacity and empty slots to receive.")

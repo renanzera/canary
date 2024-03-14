@@ -29,7 +29,7 @@ function vipGod.onSay(player, words, param)
 		return true
 	end
 
-	local targetVipDays = target:getVipDays()
+	local targetVipDays = target:getVipDays() + 1
 	targetName = target:getName()
 
 	if action == "check" then

@@ -8,49 +8,56 @@ local config = {
 
 	[VOCATION.ID.SORCERER] = {
 		items = {
-			{ 3059, 1 }, -- spellbook
+			{ 3445, 1 }, -- salamander shield
 			{ 3074, 1 }, -- wand of vortex
-			{ 7991, 1 }, -- magician's robe
+			{ 8042, 1 }, -- spirit cloak
 			{ 7992, 1 }, -- mage hat
-			{ 3362, 1 }, -- studded legs
-			{ 3552, 1 }, -- leather boots
-			{ 3572, 1 }, -- scarf
+			{ 3558, 1 }, -- chain legs
+			{ 3551, 1 }, -- sandals
+			{ 3085, 200 }, -- dragon necklace
+			{ 19359, 1 }, -- horn
 		},
 
 		container = {
 			{ 3003, 1 }, -- rope
 			{ 5710, 1 }, -- light shovel
 			{ 268, 10 }, -- mana potion
+			{ 3075, 1 }, -- wand of dragonbreath
+			{ 3725, 20 }, -- brown mushroom
 		},
 	},
 
 	[VOCATION.ID.DRUID] = {
 		items = {
-			{ 3059, 1 }, -- spellbook
+			{ 3445, 1 }, -- salamander shield
 			{ 3066, 1 }, -- snakebite rod
-			{ 7991, 1 }, -- magician's robe
+			{ 8042, 1 }, -- spirit cloak
 			{ 7992, 1 }, -- mage hat
-			{ 3362, 1 }, -- studded legs
-			{ 3552, 1 }, -- leather boots
-			{ 3572, 1 }, -- scarf
+			{ 3558, 1 }, -- chain legs
+			{ 3551, 1 }, -- sandals
+			{ 3085, 200 }, -- dragon necklace
+			{ 19359, 1 }, -- horn
 		},
 
 		container = {
 			{ 3003, 1 }, -- rope
 			{ 5710, 1 }, -- light shovel
 			{ 268, 10 }, -- mana potion
+			{ 3070, 1 }, -- moonlight rod
+			{ 3725, 20 }, -- brown mushroom			
 		},
 	},
 
 	[VOCATION.ID.PALADIN] = {
 		items = {
-			{ 3425, 1 }, -- dwarven shield
+			{ 17810, 1 }, -- spike shield
 			{ 3277, 1 }, -- spear
-			{ 3571, 1 }, -- ranger's cloak
-			{ 8095, 1 }, -- ranger legs
-			{ 3552, 1 }, -- leather boots
-			{ 3572, 1 }, -- scarf
-			{ 3374, 1 }, -- legion helmet
+			{ 8044, 1 }, -- belted cape
+			{ 3372, 1 }, -- brass legs
+			{ 3551, 1 }, -- sandals
+			{ 3085, 200 }, -- dragon necklace
+			{ 3351, 1 }, -- steel helmet
+			{ 19359, 1 }, -- horn
 		},
 
 		container = {
@@ -58,27 +65,29 @@ local config = {
 			{ 5710, 1 }, -- light shovel
 			{ 266, 10 }, -- health potion
 			{ 3350, 1 }, -- bow
-			{ 3447, 50 }, -- 50 arrows
+			{ 3725, 20 }, -- brown mushroom
 		},
 	},
 
 	[VOCATION.ID.KNIGHT] = {
 		items = {
-			{ 3425, 1 }, -- dwarven shield
-			{ 7773, 1 }, -- steel axe
+			{ 17810, 1 }, -- spike shield
+			{ 3316, 1 }, -- orcish axe
 			{ 3359, 1 }, -- brass armor
-			{ 3354, 1 }, -- brass helmet
+			{ 3384, 1 }, -- dark helmet
 			{ 3372, 1 }, -- brass legs
-			{ 3552, 1 }, -- leather boots
-			{ 3572, 1 }, -- scarf
+			{ 3551, 1 }, -- sandals
+			{ 3085, 200 }, -- dragon necklace
+			{ 19359, 1 }, -- horn
 		},
 
 		container = {
-			{ 7774, 1 }, -- jagged sword
-			{ 3327, 1 }, -- daramanian mace
+			{ 3345, 1 }, -- templar scytheblade
+			{ 3305, 1 }, -- battle hammer 
 			{ 3003, 1 }, -- rope
 			{ 5710, 1 }, -- light shovel
 			{ 266, 10 }, -- health potion
+			{ 3725, 20 }, -- brown mushroom
 		},
 	},
 }
@@ -107,6 +116,16 @@ function sendFirstItems.onLogin(player)
 			backpack:addItem(targetVocation.container[i][1], targetVocation.container[i][2])
 		end
 	end
+
+	if player:getVocation():getId() == VOCATION.ID.PALADIN then
+		local quiver = player:addItem(35562)
+		if not quiver then
+			return true
+		end
+
+		quiver:addItem(3447, 100)
+	end
+
 	return true
 end
 
